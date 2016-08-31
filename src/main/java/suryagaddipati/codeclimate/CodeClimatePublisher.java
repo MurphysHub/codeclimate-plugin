@@ -32,7 +32,7 @@ public class CodeClimatePublisher extends HealthAwarePublisher{
                     "  --volume \"$PWD\":/code " +
                     "  --volume /var/run/docker.sock:/var/run/docker.sock " +
                     "  --volume /tmp/cc:/tmp/cc " +
-                    "  codeclimate/codeclimate analyze -f json> code-climate-result.json";
+                    "  codeclimate/codeclimate:0.24.3 analyze -f json> code-climate-result.json";
             Shell execution = new Shell("#!/bin/bash  -ex \n" + codeClimateCommand);
             execution.perform(((AbstractBuild) build), launcher, launcher.getListener());
             FilesParser parser = new FilesParser("CODE_CLIMATE", StringUtils.defaultIfEmpty(getResultFile(), DEFAULT_FILE_NAME),
